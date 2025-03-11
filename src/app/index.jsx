@@ -1,16 +1,22 @@
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { useRouter } from "expo-router";
+import { Redirect, router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { images } from "../../constants";
 import CustomButton from "components/CustomButton";
 import { StatusBar } from "expo-status-bar";
+import { useGlobalContext } from "context/GlobalProvider";
 
 const IndexRoute = () => {
-	const router = useRouter();
+	const { isLoading, isLoggedIn } = useGlobalContext();
+
+	if (!isLoading && isLoggedIn) {
+		console.log("IS LOGGED IN");
+		return <Redirect href="/home" />;
+	}
 
 	return (
-		<SafeAreaView className="bg-primary h-full">
+		<SafeAreaView className="h-full bg-primary">
 			<ScrollView contentContainerStyle={{ width: "100%" }}>
 				<View className="w-full min-h-[85vh] justify-center items-center h-full px-4">
 					<Image
@@ -25,19 +31,19 @@ const IndexRoute = () => {
 						resizeMode="contain"
 					/>
 
-					<Text className="mt-5 text-3xl text-white font-bold text-center">
+					<Text className="mt-5 text-3xl font-bold text-center text-white">
 						Discovere Endless Possibilities with{" "}
 						<Text className="relative text-secondary-200">Aora</Text>
 					</Text>
 
-					<Text className="text-sm font-pregular text-gray-100 mt-7 text-center">
+					<Text className="mt-7 text-sm text-center text-gray-100 font-pregular">
 						Where creativity meets innovation: embark on a journey of limitless
 						exploration with Aora
 					</Text>
 
 					<CustomButton
 						title="Continue with Email"
-						handlePress={() => router.push("/sign-in")}
+						onPress={() => router.push("/sign-in")}
 						containerStyles="w-full mt-7"
 					/>
 				</View>

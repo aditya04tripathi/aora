@@ -3,6 +3,8 @@ import "../global.css";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
+import { verifyInstallation } from "nativewind";
+import GlobalProvider from "context/GlobalProvider";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -32,8 +34,13 @@ export default function Layout() {
 	}
 
 	return (
-		<Stack screenOptions={{ headerShown: false }}>
-			<Stack.Screen name="index" />
-		</Stack>
+		<GlobalProvider>
+			<Stack screenOptions={{ headerShown: false }}>
+				<Stack.Screen name="index" />
+				<Stack.Screen name="(auth)" />
+				<Stack.Screen name="(tabs)" />
+				<Stack.Screen name="search" />
+			</Stack>
+		</GlobalProvider>
 	);
 }

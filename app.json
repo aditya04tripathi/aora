@@ -1,16 +1,19 @@
 {
-  "expo": {
-    "scheme": "acme",
-    "userInterfaceStyle": "automatic",
-    "orientation": "default",
-    "web": {
-      "output": "static"
-    },
-    "plugins": [
-      "expo-router",
-      "expo-font"
-    ],
-    "name": "bookmark_app",
-    "slug": "bookmark_app"
-  }
+	"expo": {
+		"scheme": "acme",
+		"userInterfaceStyle": "automatic",
+		"orientation": "default",
+		"web": {
+			"output": "static"
+		},
+		"plugins": ["expo-router", "expo-font"],
+		"name": "bookmark_app",
+		"slug": "bookmark_app",
+		"android": {
+			"package": "com.adityatripathi.aora"
+		},
+		"ios": {
+			"bundleIdentifier": "com.adityatripathi.aora"
+		}
+	}
 }
