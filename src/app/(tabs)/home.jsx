@@ -1,19 +1,23 @@
 import { ActivityIndicator, FlatList, Image, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { images } from "../../../constants";
+import { icons, images } from "../../../constants";
 import SearchInput from "components/SearchInput";
 import Trending from "components/Trending";
 import EmptyState from "components/EmptyState";
 import { getLatestPosts, getPosts } from "lib/appwrite";
 import useAppwrite from "lib/useAppwrite";
 import VideoCard from "components/VideoCard";
+import { useGlobalContext } from "context/GlobalProvider";
 
 const Home = () => {
 	const [refreshing, setRefreshing] = useState(false);
 
 	const { data: posts, refetch } = useAppwrite(getPosts);
 	const { data: latestPosts } = useAppwrite(getLatestPosts);
+	const { user } = useGlobalContext();
+
+	console.log(JSON.stringify(user, null, 2));
 
 	const onRefresh = async () => {
 		setRefreshing(true);
@@ -37,14 +41,14 @@ const Home = () => {
 									Welcome back.
 								</Text>
 								<Text className="text-2xl text-gray-100 font-psemibold">
-									Aditya
+									{user.username}
 								</Text>
 							</View>
 
 							<View className="mt-1.5">
 								<Image
-									source={images.logoSmall}
-									className="h-10 w-9"
+									source={user.avatar ? { uri: user.avatar } : icons.logoSmall}
+									className="w-10 h-10 rounded-full"
 									resizeMode="contain"
 								/>
 							</View>
