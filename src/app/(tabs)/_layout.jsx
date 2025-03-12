@@ -2,10 +2,11 @@ import { View, Text, Image } from "react-native";
 import React from "react";
 import { Tabs } from "expo-router";
 import { icons } from "../../../constants";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const TabIcon = ({ icon, color, name, focused }) => {
 	return (
-		<View className="flex flex-col items-center justify-center gap-2">
+		<SafeAreaView className="flex flex-col items-center justify-center gap-2">
 			<Image
 				source={icon}
 				resizeMode="contain"
@@ -20,7 +21,7 @@ const TabIcon = ({ icon, color, name, focused }) => {
 			>
 				{name}
 			</Text>
-		</View>
+		</SafeAreaView>
 	);
 };
 
